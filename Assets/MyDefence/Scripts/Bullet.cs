@@ -9,6 +9,7 @@ namespace MyDefence
        private Transform target;
 
         public float moveSpeed = 70f;
+        public GameObject bulletImpactEffectPrefab;
         #endregion
       
         public void SetTarget(Transform _target)
@@ -36,7 +37,10 @@ namespace MyDefence
 
             void HitTarget()
             {
-                Debug.Log("HitTarget");
+                GameObject effectGo= Instantiate(bulletImpactEffectPrefab, this.transform.position,Quaternion.identity);
+                Destroy(effectGo,2f);
+
+                //Debug.Log("HitTarget");
                 Destroy(target.gameObject);
 
                 Destroy(this.gameObject);
