@@ -34,19 +34,20 @@ namespace MyDefence
             }
 
             transform.Translate(dir.normalized * Time.deltaTime * moveSpeed);
+        }
 
-            void HitTarget()
+            protected virtual  void HitTarget()
             {
                 GameObject effectGo= Instantiate(bulletImpactEffectPrefab, this.transform.position,Quaternion.identity);
                 Destroy(effectGo,2f);
 
-                //Debug.Log("HitTarget");
+                
                 Destroy(target.gameObject);
 
                 Destroy(this.gameObject);
 
 
             }
-        }
+        
     }
 }

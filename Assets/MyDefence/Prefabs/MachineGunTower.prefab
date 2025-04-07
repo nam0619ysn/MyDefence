@@ -301,6 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1170429190987154131}
   - component: {fileID: 2058050502887706573}
+  - component: {fileID: -6498578967478983879}
   m_Layer: 10
   m_Name: MachineGunTower
   m_TagString: Untagged
@@ -345,6 +346,26 @@ MonoBehaviour:
   shootTimer: 1
   bulletPrefab: {fileID: 1072132685509545968, guid: 4fa7247dbc1b3aa4ca22980117cacbe8, type: 3}
   firePoint: {fileID: 2426530652183433866}
+--- !u!114 &-6498578967478983879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5698757669552951379}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f126fda5975c64fb33e0d45953fef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 7
+  ememyTag: Enemy
+  searchTimer: 0.5
+  partToRotate: {fileID: 0}
+  turnSpeed: 5
+  shootTimer: 1
+  bulletPrefab: {fileID: 0}
+  firePoint: {fileID: 0}
 --- !u!1 &7243654657290170008
 GameObject:
   m_ObjectHideFlags: 0

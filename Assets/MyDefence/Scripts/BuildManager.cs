@@ -26,6 +26,7 @@ namespace MyDefence
         #region Field
         private GameObject towerToBuild;
         public GameObject machineGunPrefab;
+        public GameObject rocketTowerPrefab;
         #endregion
 
         public GameObject GetTowerToBuild()
@@ -33,9 +34,15 @@ namespace MyDefence
             return towerToBuild;
         }
 
-        public void Start()
+
+        public void SetTowerToBuild(GameObject tower)
         {
-            towerToBuild = machineGunPrefab;
+            towerToBuild = tower;
+        }
+
+        private void Start()
+        {
+            //towerToBuild = machineGunPrefab;
         }
     }
 }
