@@ -3,10 +3,15 @@ namespace MyDefence
 {
     public class Buildmenu : MonoBehaviour
     {
-       public void MachineGunButton()
+
+        #region Field
+        public TowerBluePrint machineGuntower;
+        public TowerBluePrint rocketTower;
+        #endregion
+        public void MachineGunButton()
         {
             Debug.Log("towertoBuild에 .machineGunPrefab 저장");
-            BuildManager.Instance.SetTowerToBuild(BuildManager.Instance.machineGunPrefab);
+            BuildManager.Instance.SetTowerToBuild(machineGuntower.towerPrefab);
         }
 
 
@@ -14,7 +19,7 @@ namespace MyDefence
        public void RocketTowerButton()
        {
             Debug.Log("towertoBuild에 RocketTowerPrefab 저장");
-            BuildManager.Instance.SetTowerToBuild(BuildManager.Instance.rocketTowerPrefab);
+            BuildManager.Instance.SetTowerToBuild(rocketTower.towerPrefab);
        }
     }
 }

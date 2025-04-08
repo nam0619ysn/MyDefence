@@ -25,8 +25,8 @@ namespace MyDefence
 
         #region Field
         private GameObject towerToBuild;
-        public GameObject machineGunPrefab;
-        public GameObject rocketTowerPrefab;
+        //public GameObject machineGunPrefab;
+        //public GameObject rocketTowerPrefab;
         #endregion
 
         public GameObject GetTowerToBuild()
