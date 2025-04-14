@@ -121,5 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b056aa56b300046b6d94141b1db1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 0.5019608, g: 1, b: 0.4, a: 0}
   hoverMaterial: {fileID: 2100000, guid: f7bc4cb36ffcc1e428e1dd4a92b5da44, type: 2}
+  moneyMaterial: {fileID: 2100000, guid: 1477d0cd54cee8845b56731702bba0b7, type: 2}
+  buildEffectPrefab: {fileID: 548977421755562664, guid: 0864e1c78bd02754098caed5798762d9, type: 3}

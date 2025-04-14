@@ -7,19 +7,28 @@ namespace MyDefence
         #region Field
         public TowerBluePrint machineGuntower;
         public TowerBluePrint rocketTower;
+        public TowerBluePrint laserTower;
         #endregion
         public void MachineGunButton()
         {
-            Debug.Log("towertoBuild에 .machineGunPrefab 저장");
-            BuildManager.Instance.SetTowerToBuild(machineGuntower.towerPrefab);
+           
+            BuildManager.Instance.SetTowerToBuild(machineGuntower);
         }
 
 
      
        public void RocketTowerButton()
        {
-            Debug.Log("towertoBuild에 RocketTowerPrefab 저장");
-            BuildManager.Instance.SetTowerToBuild(rocketTower.towerPrefab);
+           
+            BuildManager.Instance.SetTowerToBuild(rocketTower);
+       } 
+       public void LaserTowerButton()
+       {
+           
+            BuildManager.Instance.SetTowerToBuild(laserTower);
        }
+
+        
+
     }
 }

@@ -10,6 +10,8 @@ namespace MyDefence
 
         public float moveSpeed = 70f;
         public GameObject bulletImpactEffectPrefab;
+
+       [SerializeField] protected float attackDamage = 50f;
         #endregion
       
         public void SetTarget(Transform _target)
@@ -33,7 +35,9 @@ namespace MyDefence
                 return;
             }
 
-            transform.Translate(dir.normalized * Time.deltaTime * moveSpeed);
+            transform.Translate(dir.normalized * Time.deltaTime * moveSpeed,Space.World);
+
+            transform.LookAt(target);
         }
 
             protected virtual  void HitTarget()
@@ -41,13 +45,26 @@ namespace MyDefence
                 GameObject effectGo= Instantiate(bulletImpactEffectPrefab, this.transform.position,Quaternion.identity);
                 Destroy(effectGo,2f);
 
-                
-                Destroy(target.gameObject);
+              
+                Damage(target);
 
                 Destroy(this.gameObject);
 
-
             }
+        protected  void Damage(Transform _target)
+        {
+            //원샸원킬
+            // Destroy(target.gameObject);
+
+            //attackdamage 만큼감산
+           
+            Enemy enemy = _target.GetComponent<Enemy>();
+            if(enemy != null)
+            {
+                enemy.TakeDamage(attackDamage);
+            }
+            
+        }
         
     }
 }

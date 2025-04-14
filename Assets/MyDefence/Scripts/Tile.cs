@@ -8,14 +8,23 @@ namespace MyDefence
         //public Color hoverColor;
 
         // private Color startColor;
-
+        //돈충분
         public Material hoverMaterial;
+
+        /// 돈 부족
+        public Material moneyMaterial;
+      
         private Material startMaterial;
 
         private Renderer renderer;
 
         private BuildManager buildManager;
+
         private GameObject tower;
+
+        private TowerBluePrint bluePrint;
+
+        public GameObject buildEffectPrefab;
         #endregion
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -30,7 +39,8 @@ namespace MyDefence
             //Debug.Log("터렛 설치");
             //Instantiate(towerPrefab, this.transform.position, Quaternion.identity);
 
-            if (BuildManager.Instance.GetTowerToBuild() == null)
+           
+            if (buildManager.CannotBuuild)
             {
                 Debug.Log("설치 타워가 없다,");
                 return;
@@ -41,9 +51,34 @@ namespace MyDefence
                 Debug.Log("타워를 설치할수 없다.,");
                 return;
             }
-            tower = Instantiate(BuildManager.Instance.GetTowerToBuild(), this.transform.position, Quaternion.identity);
 
+            
+            BuildTower();
+        }
+
+        void BuildTower()
+        {
+
+            if (buildManager.NotEnoughMoney)
+                return;
+
+            bluePrint = buildManager.GetTowerToBuild();
+
+            
+            //돈 계산
+             PlayerStats.UseMoney(bluePrint.cost);
+            
+             tower = Instantiate(bluePrint.towerPrefab, this.transform.position, Quaternion.identity);
+
+             GameObject effectGo= Instantiate(buildEffectPrefab, this.transform.position, Quaternion.identity);
+             Destroy(effectGo,2f);
+            
+
+            //초기화
             buildManager.SetTowerToBuild(null);
+            Debug.Log($"건설하고도 남은돈{PlayerStats.Money}");
+
+
         }
         private void OnMouseEnter()
         {
@@ -52,10 +87,17 @@ namespace MyDefence
 
                 return;
             }
-
-
-            //renderer.material.color=hoverColor;
+            if (buildManager.NotEnoughMoney)
+            {
+                renderer.material = moneyMaterial;
+            }
+            else
+            {
+         
             renderer.material = hoverMaterial;
+            }
+
+           
         }
         //private void OnMouseDrag()
         //{

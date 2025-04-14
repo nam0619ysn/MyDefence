@@ -6,12 +6,22 @@ namespace MyDefence
     {
 
         #region Field
-        public float speed = 5f;
 
-        //private Vector3 targetPosition;
+        private float health;
+        [SerializeField] private float startHealth = 100f;
+
+        public float movespeed = 5f;
+
+        private float startMoveSpeed;
+
+        
         //waypoint 오브젝트 츠랜스폰 객체
         private Transform target;
         private int wayPointIndex = 0;
+
+        [SerializeField]private int rewardGold = 50;
+
+        public GameObject deathEffectPrefab;
         #endregion
 
        
@@ -20,13 +30,15 @@ namespace MyDefence
         {
             wayPointIndex = 0;
             target= Waypoints.wayPoints[wayPointIndex];
+            health = startHealth;
+            startMoveSpeed = movespeed;
         }
 
      
         void Update()
         {
             Vector3 dir = target.position - this.transform.position;
-            transform.Translate(dir.normalized * Time.deltaTime * speed, Space.World);
+            transform.Translate(dir.normalized * Time.deltaTime * movespeed, Space.World);
 
 
             float distance = Vector3.Distance(target.position, this.transform.position);
@@ -37,7 +49,7 @@ namespace MyDefence
 
             }
 
-
+            movespeed = startMoveSpeed;
 
 
         }
@@ -47,14 +59,41 @@ namespace MyDefence
 
             if (wayPointIndex== Waypoints.wayPoints.Length-1)
             {
-                Debug.Log("종점도착");
+
+
+                PlayerStats.Uselife(1);            
                 Destroy(this.gameObject);
                 return;
             }
             wayPointIndex++;
-           // Debug.Log($"{wayPointIndex}도착"); 
+           
             target = Waypoints.wayPoints[wayPointIndex];
             
+        }
+
+        public void TakeDamage(float damage)
+        {
+            health -= damage;
+            Debug.Log($"Now Health:{health}");
+
+            if(health <= 0f)
+            {
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            PlayerStats.AddMoney(rewardGold);
+
+            GameObject effectGo=Instantiate(deathEffectPrefab, this.transform.position, Quaternion.identity);
+            Destroy(effectGo, 2f);
+            Destroy(this.gameObject, 0f);
+        }
+
+        public void Slow(float rate)
+        {
+            movespeed = startMoveSpeed * (1-rate);
         }
     }
 }

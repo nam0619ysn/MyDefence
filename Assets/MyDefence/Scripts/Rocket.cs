@@ -27,6 +27,7 @@ namespace MyDefence
             Destroy(this.gameObject);
 
         }
+       
 
         private void Explosion()
         {
@@ -35,7 +36,16 @@ namespace MyDefence
             {
                 if (hitCollider.tag == enmeyTag)
                 {
-                    Destroy(hitCollider.gameObject);
+
+                    float distance = Vector3.Distance(this.transform.position, hitCollider.transform.position);
+
+                    float damage = attackDamage * ((damageRange -distance) / damageRange);
+
+                    Enemy enemy = hitCollider.GetComponent<Enemy>();
+                    if(enemy != null)
+                    {
+                        enemy.TakeDamage(damage);
+                    }
                 }
 
             }

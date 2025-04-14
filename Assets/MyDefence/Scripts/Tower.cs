@@ -5,8 +5,10 @@ namespace MyDefence
     {
         #region Field
 
-        public float attackRange = 7f;
-        private Transform target;
+        public float attackRange =5f;
+
+        protected Transform target;
+        protected Enemy targetEnemy;
 
         public string ememyTag = "Enemy";
 
@@ -47,19 +49,20 @@ namespace MyDefence
             if (minDistance != null && minDistance <= attackRange)
             {
                 target = nearEnemy.transform;
+                targetEnemy = target.GetComponent<Enemy>();
                 // Debug.Log("Find Target");
             }
             else
             {
                 target = null;
+                targetEnemy = null;
             }
 
         }
 
-        private void Update()
+        protected virtual void Update()
         {
-
-            //countdown += Time.deltaTime;
+             //countdown += Time.deltaTime;
             //if (countdown>=searchTimer)
             //{
             //    UpdateTarget();
@@ -67,6 +70,7 @@ namespace MyDefence
             //}
             if (target == null)
                 return;
+
             LockOn();
 
             //타이머
@@ -81,6 +85,10 @@ namespace MyDefence
 
             }
         }
+        
+
+           
+        
         private void Shoot()
         {
             //  Debug.Log("Shoot");
@@ -88,10 +96,11 @@ namespace MyDefence
             Bullet bullet = bulletGo.GetComponent<Bullet>();
             bullet.SetTarget(target);
         }
-        void LockOn()
+       protected void LockOn()
         {
             Vector3 dir = target.position - this.transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(dir);
+
             Quaternion lookRotation = Quaternion.Lerp(partToRotate.rotation, targetRotation, Time.deltaTime * turnSpeed);
             Vector3 eulerRotation = lookRotation.eulerAngles;
             partToRotate.rotation = Quaternion.Euler(0f, eulerRotation.y, 0f);

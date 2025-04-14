@@ -5,19 +5,30 @@ namespace MyDefence
     {
         #region Field
         private static int money;
+
         [SerializeField] private int startMoney = 400;
+
+        private static int lives;
+        [SerializeField] private int startLives = 10;
         #endregion
+
 
         #region Property
         public static int Money
         {
             get{ return money; }
         }
+        public static int Lives
+        {
+            get{ return lives; }
+        }
         #endregion
 
         private void Start()
         {
             money = startMoney;
+            lives = startLives;
+          
         }
         public static void AddMoney(int amount)
         {
@@ -40,6 +51,22 @@ namespace MyDefence
             return money >= amount;
             
            
+        }
+        public static void Addlife(int amount)
+        {
+            lives += amount;
+            
+           
+        }
+        public static void Uselife(int amount)
+        {
+            lives -= amount;
+            
+           if(lives <= 0)
+            {
+                lives = 0;
+                Debug.Log("GameOver");
+            }
         }
     }
 }

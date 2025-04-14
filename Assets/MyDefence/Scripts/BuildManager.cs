@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 namespace MyDefence
 {
@@ -24,25 +25,46 @@ namespace MyDefence
         #endregion
 
         #region Field
-        private GameObject towerToBuild;
+        private TowerBluePrint towerToBuild;
+
+        private int buildCost;
         //public GameObject machineGunPrefab;
         //public GameObject rocketTowerPrefab;
+        private int cost;
         #endregion
 
-        public GameObject GetTowerToBuild()
+        #region Property
+        public bool NotEnoughMoney
+        {
+            get { return PlayerStats.Money < towerToBuild.cost; }
+        }
+
+        public bool CannotBuuild
+        {
+            get { return towerToBuild == null; }
+        }
+        #endregion
+        private void Start()
+        {
+          
+        }
+        public TowerBluePrint GetTowerToBuild()
         {
             return towerToBuild;
         }
 
 
-        public void SetTowerToBuild(GameObject tower)
+        public void SetTowerToBuild(TowerBluePrint tower)
         {
             towerToBuild = tower;
+            
         }
 
-        private void Start()
+
+        public int GetBulidCost()
         {
-            //towerToBuild = machineGunPrefab;
+            return cost;
         }
+       
     }
 }
