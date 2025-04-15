@@ -22,9 +22,15 @@ namespace MyDefence
 
         private GameObject tower;
 
-        private TowerBluePrint bluePrint;
+       public TowerBluePrint bluePrint;
 
         public GameObject buildEffectPrefab;
+
+
+        #endregion
+
+        #region Property
+        public bool IsUpgrade { get; private set; }
         #endregion
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -38,21 +44,20 @@ namespace MyDefence
         {
             //Debug.Log("터렛 설치");
             //Instantiate(towerPrefab, this.transform.position, Quaternion.identity);
-
            
+
+            if (tower != null)
+            {
+                buildManager.SelectTile(this);
+                return;
+            }
+
             if (buildManager.CannotBuuild)
             {
                 Debug.Log("설치 타워가 없다,");
                 return;
             }
 
-            if (tower != null)
-            {
-                Debug.Log("타워를 설치할수 없다.,");
-                return;
-            }
-
-            
             BuildTower();
         }
 
@@ -68,6 +73,8 @@ namespace MyDefence
             //돈 계산
              PlayerStats.UseMoney(bluePrint.cost);
             
+           
+
              tower = Instantiate(bluePrint.towerPrefab, this.transform.position, Quaternion.identity);
 
              GameObject effectGo= Instantiate(buildEffectPrefab, this.transform.position, Quaternion.identity);
@@ -79,6 +86,24 @@ namespace MyDefence
             Debug.Log($"건설하고도 남은돈{PlayerStats.Money}");
 
 
+        }
+
+        public void UpgradeTower()
+        {
+            if (!PlayerStats.HasMoney(bluePrint.upgradecost))
+            {
+                Debug.Log("돈 부족");
+                return;
+            }
+            PlayerStats.UseMoney(bluePrint.upgradecost);
+
+            Destroy(tower);
+            IsUpgrade = true;
+
+            tower = Instantiate(bluePrint.upgradePrefab, this.transform.position, Quaternion.identity);
+            GameObject effectGo = Instantiate(buildEffectPrefab, this.transform.position, Quaternion.identity);
+            Destroy(effectGo, 2f);
+            buildManager.SetTowerToBuild(null);
         }
         private void OnMouseEnter()
         {

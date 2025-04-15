@@ -9,7 +9,10 @@ namespace MyDefence
         [SerializeField] private int startMoney = 400;
 
         private static int lives;
+
         [SerializeField] private int startLives = 10;
+
+
         #endregion
 
 
@@ -22,13 +25,15 @@ namespace MyDefence
         {
             get{ return lives; }
         }
+
+        public static int Rounds { get; set; }
         #endregion
 
         private void Start()
         {
             money = startMoney;
             lives = startLives;
-          
+            Rounds = 0;
         }
         public static void AddMoney(int amount)
         {
@@ -66,6 +71,7 @@ namespace MyDefence
             {
                 lives = 0;
                 Debug.Log("GameOver");
+
             }
         }
     }

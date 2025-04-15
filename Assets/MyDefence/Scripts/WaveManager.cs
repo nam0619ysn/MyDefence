@@ -43,7 +43,9 @@ namespace MyDefence
         IEnumerator SpawnWave()
         {
                 waveCount++;
-              
+
+            PlayerStats.Rounds++;
+
                 for(int i = 0; i < waveCount; i++)
                 {
                     SpawnEnemy();

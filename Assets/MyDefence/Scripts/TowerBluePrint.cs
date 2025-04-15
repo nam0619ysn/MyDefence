@@ -7,5 +7,9 @@ namespace MyDefence
     {
         public GameObject towerPrefab;
         public int cost;
+
+        public GameObject upgradePrefab;
+        public int upgradecost;
+
     }
 }

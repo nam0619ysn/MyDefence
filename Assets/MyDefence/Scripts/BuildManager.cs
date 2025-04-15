@@ -27,6 +27,10 @@ namespace MyDefence
         #region Field
         private TowerBluePrint towerToBuild;
 
+
+        public TileUI tileUI;
+        private Tile selectTile;
+
         private int buildCost;
         //public GameObject machineGunPrefab;
         //public GameObject rocketTowerPrefab;
@@ -59,7 +63,23 @@ namespace MyDefence
             towerToBuild = tower;
             
         }
+        public  void SelectTile(Tile tile)
+        {
 
+            if(selectTile == tile)
+            {
+                DeselectTile();
+                return;
+            }
+            selectTile = tile;
+            tileUI.ShowTileUI(selectTile);
+        }
+
+        public void DeselectTile()
+        {
+            tileUI.HideTileUI();
+            selectTile = null;
+        }
 
         public int GetBulidCost()
         {

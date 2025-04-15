@@ -5,25 +5,74 @@ namespace MyDefence
     {
         #region Field
         [SerializeField]private bool isCheat = false;
+
+
+       public GameObject gameOverUI;
+
+        private static bool isGameOver=false;
+
+        
+
         #endregion
+
+        #region Property
+
+        public static bool IsGameOver
+        {
+            get { return isGameOver; }
+        }
+        #endregion
+
+
+        private void Start()
+        {
+            isGameOver = false;
+        }
 
         private void Update()
         {
+
+            if (IsGameOver)
+                return;
+
+
+            if (PlayerStats.Lives <= 0)
+            {
+                ShowGameOverUI();
+            }
+
             if (Input.GetKeyDown(KeyCode.M))
             {
                 ShowMeTheMoney();
             }
-        }
 
-        void ShowMeTheMoney()
-        {
-            if(isCheat == false)
+            if (Input.GetKeyDown(KeyCode.O)  && isCheat==true)
             {
-                return;
+                ShowGameOverUI();
             }
-
-            PlayerStats.AddMoney(10000);
         }
+
+        void ShowGameOverUI()
+        {
+
+           
+            isGameOver = true;
+            gameOverUI.SetActive(true);
+        }
+
+        
+         void ShowMeTheMoney()
+         {
+             if(isCheat == false)
+             {
+                return;
+             }
+
+            gameOverUI.SetActive(true);
+
+         }
+        
+        
         void LevelUpCheating()
         {
             
