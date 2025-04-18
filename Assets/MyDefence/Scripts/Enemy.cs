@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 namespace MyDefence
 {
     public class Enemy : MonoBehaviour
@@ -8,6 +9,7 @@ namespace MyDefence
         #region Field
 
         private float health;
+        public Image healthBarImage;
         [SerializeField] private float startHealth = 100f;
 
         public float movespeed = 5f;
@@ -22,6 +24,7 @@ namespace MyDefence
         [SerializeField]private int rewardGold = 50;
 
         public GameObject deathEffectPrefab;
+
         #endregion
 
        
@@ -76,7 +79,9 @@ namespace MyDefence
             health -= damage;
             Debug.Log($"Now Health:{health}");
 
-            if(health <= 0f)
+            healthBarImage.fillAmount = health / startHealth;
+
+            if (health <= 0f)
             {
                 Die();
             }

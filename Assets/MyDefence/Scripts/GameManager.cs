@@ -68,7 +68,7 @@ namespace MyDefence
                 return;
              }
 
-            gameOverUI.SetActive(true);
+            PlayerStats.AddMoney(10000);
 
          }
         

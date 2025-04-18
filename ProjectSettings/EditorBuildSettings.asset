@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/MyDefence/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/MyDefence/Scenes/Tilte.unity
+    guid: 48539f096f470df4d9f9405595746449
+  - enabled: 1
+    path: Assets/MyDefence/Scenes/MainMenu.unity
+    guid: f664e609418b2b84a8d368829514e715
+  - enabled: 1
+    path: Assets/MyDefence/Scenes/PlayScene.unity
+    guid: fbbdbff0d6b3c5b49855c1ac41e91642
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

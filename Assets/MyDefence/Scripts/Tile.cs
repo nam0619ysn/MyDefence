@@ -25,12 +25,16 @@ namespace MyDefence
        public TowerBluePrint bluePrint;
 
         public GameObject buildEffectPrefab;
+        public GameObject sellEffectPrefab;
 
 
         #endregion
 
         #region Property
         public bool IsUpgrade { get; private set; }
+        public bool IsSell { get; private set; }
+
+     
         #endregion
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -102,6 +106,22 @@ namespace MyDefence
 
             tower = Instantiate(bluePrint.upgradePrefab, this.transform.position, Quaternion.identity);
             GameObject effectGo = Instantiate(buildEffectPrefab, this.transform.position, Quaternion.identity);
+            Destroy(effectGo, 2f);
+            buildManager.SetTowerToBuild(null);
+        }
+
+        public void SellTower()
+        {
+
+            int sellMoney = bluePrint.Sellcost;
+
+            Destroy(tower);
+
+            bluePrint = null;
+            IsSell = true;
+
+            PlayerStats.AddMoney(sellMoney);
+            GameObject effectGo = Instantiate(sellEffectPrefab, this.transform.position, Quaternion.identity);
             Destroy(effectGo, 2f);
             buildManager.SetTowerToBuild(null);
         }

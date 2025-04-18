@@ -13,6 +13,10 @@ namespace MyDefence
 
         public TextMeshProUGUI upgradeCost;
         public Button upgradeButton;
+
+        public TextMeshProUGUI sellCost;
+        public Button sellButton;
+
         #endregion
 
         public void ShowTileUI(Tile tile)
@@ -31,7 +35,7 @@ namespace MyDefence
                 //upgradeButton.interactable = true;
             }
 
-           
+            sellCost.text = tile.bluePrint.Sellcost.ToString() + "G";
 
             offset.SetActive(true);
         }
@@ -44,6 +48,13 @@ namespace MyDefence
         public void UpgradeTower()
         {
             selectTile.UpgradeTower();
+
+            BuildManager.Instance.DeselectTile();
+        }
+
+        public void SellTower()
+        {
+            selectTile.SellTower();
 
             BuildManager.Instance.DeselectTile();
         }
